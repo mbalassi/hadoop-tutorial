@@ -3,6 +3,7 @@ package hu.sztaki.hadoop.tutorial.wordcount;
 import java.io.IOException;
 import java.util.*;
 
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.conf.*;
 import org.apache.hadoop.io.*;
@@ -51,6 +52,10 @@ public class WordCount {
     job.setMapperClass(Map.class);
     job.setReducerClass(Reduce.class);
     //job.setNumReduceTasks(2);
+    job.setJarByClass(WordCount.class);
+    
+    FileSystem fs = FileSystem.get(conf);
+    fs.delete(new Path(args[1]), true);
 
     job.setInputFormatClass(TextInputFormat.class);
     job.setOutputFormatClass(TextOutputFormat.class);
