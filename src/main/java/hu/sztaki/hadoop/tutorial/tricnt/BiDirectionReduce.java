@@ -11,6 +11,13 @@ public class BiDirectionReduce extends
 
 	public void reduce(LongWritable id, Iterable<Text> destsOrSrcs,
 			Context context) throws IOException, InterruptedException {
-		// TODO
+		String destStr = "";
+		String srcStr = "";
+
+		for (Text dos : destsOrSrcs) {
+			//parse the input into a dest and a source String
+		}
+		// id with its out- and inedges
+		context.write(id, new Text(destStr + "|" + srcStr));
 	}
 }
