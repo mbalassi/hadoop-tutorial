@@ -12,7 +12,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import hu.sztaki.hadoop.tutorial.tricnt.DirectedTriangleCounter.Counters;
 
 public class TrianglesReduce extends
-		Reducer<LongWritable, Text, NullWritable, NullWritable> {
+		Reducer<LongWritable, Text, LongWritable, NullWritable> {
 
 	public void reduce(LongWritable id, Iterable<Text> destsOrTri,
 			Context context) throws IOException, InterruptedException {
@@ -45,6 +45,6 @@ public class TrianglesReduce extends
 		}
 		// result through a counter
 		context.getCounter(Counters.TRI_CNT).increment(triCnt);
-		context.write(NullWritable.get(), NullWritable.get());
+		context.write(new LongWritable(triCnt), NullWritable.get());
 	}
 }
